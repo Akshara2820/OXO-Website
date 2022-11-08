@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import MobileSection from "./mobileSection";
 import EnjoyMusic from "./enjoyMusic";
@@ -9,19 +9,21 @@ import Header from "./header";
 import Download from "./download";
 import Stream from "./stream";
 import AppleAndroid from "./appleAndroid";
+import { MdMoveToInbox } from "react-icons/md";
+
 function Home() {
   return (
     <Root>
       <div className="main_section">
         <Header />
         <Download />
-        <AppleAndroid/>
+        <AppleAndroid />
         <Stream />
       </div>
-      {/* <MobileSection /> */}
+      <MobileSection />
       <EnjoyMusic />
       <MapSection />
-      {/* <LatestBlog /> */}
+      <LatestBlog />
       <Footer />
     </Root>
   );
