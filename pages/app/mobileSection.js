@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 const boxVariant = {
-  visible: {y:0, opacity: 1,  transition: { duration: 1 } },
+  visible: {y:0, opacity: 1,  transition: { duration: 0.6 } },
   hidden: {y:100, opacity: 0, }
 };
 function MobileSection() {
@@ -85,7 +85,7 @@ export default MobileSection;
 const Root = styled.div`
   max-width: 1200px;
   width: 100%;
-  margin: 0px auto;
+  margin: 0px auto ;
   padding: 20px;
   .bg_image{
     background-image: url("./image/oxo-4.png");

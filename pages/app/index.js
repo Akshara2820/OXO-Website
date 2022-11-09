@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import MobileSection from "./mobileSection";
 import EnjoyMusic from "./enjoyMusic";
@@ -9,11 +9,11 @@ import Header from "./header";
 import Download from "./download";
 import Stream from "./stream";
 import AppleAndroid from "./appleAndroid";
-import { MdMoveToInbox } from "react-icons/md";
-
-function Home() {
+import PowerfulAudio from "./powerfulAudio";
+function Dashboard() {
   return (
-    <Root>
+    <div>
+     <Root>
       <div className="main_section">
         <Header />
         <Download />
@@ -22,14 +22,16 @@ function Home() {
       </div>
       <MobileSection />
       <EnjoyMusic />
+      <PowerfulAudio/>
       <MapSection />
       <LatestBlog />
       <Footer />
     </Root>
-  );
+    </div>
+  )
 }
 
-export default Home;
+export default Dashboard
 const Root = styled.div`
   .main_section {
     max-width: 1530px;
@@ -37,4 +39,4 @@ const Root = styled.div`
     margin: 0px auto;
     padding-top: 30px;
   }
-`;
+`

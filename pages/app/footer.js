@@ -117,8 +117,8 @@ const Root = styled.div`
     max-width: 1530px;
     width: 95%;
     margin: 0px auto;
-    padding-top: 80px;
-    padding-bottom: 50px;
+    padding-top: 100px;
+    padding-bottom: 100px;
   }
   .media_icons {
     text-align: -webkit-center;

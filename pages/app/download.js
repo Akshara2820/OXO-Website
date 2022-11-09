@@ -30,7 +30,6 @@ function Download() {
             </div>
           </motion.div>
           <motion.div ref={ref} variants={boxVariant} initial="hidden" animate={control}>
-       
             <div className="sm:mx-6 flex font-['Roboto'] text-center md:text-start flex-col justify-center sm:items-start items-center lg:max-w-[40%]">
                 <h1 className="sm:pt-12">
                   The most powerful audio streamer for devices
