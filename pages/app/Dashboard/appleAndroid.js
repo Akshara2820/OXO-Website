@@ -3,6 +3,7 @@ import { BsApple } from "react-icons/bs";
 import { DiAndroid } from "react-icons/di";
 import React, { useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 const boxVariant = {
   visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
   hidden: { y: 100, opacity: 0 },
@@ -17,19 +18,19 @@ const AndroidVariant = {
 };
 function AppleAndroid() {
   const control = useAnimation();
-  const [ref, inView] = useRef();
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     if (inView) {
-      control.start("hidden");
-    } else {
       control.start("visible");
+    } else {
+      control.start("hidden");
     }
   }, [control, inView]);
 
   return (
     <Root>
-      <div className="sm:flex  items-center justify-evenly section_  ">
+      <div className="sm:flex  items-center justify-evenly   ">
         <motion.div
           className="sm:flex  items-center justify-evenly"
           ref={ref}

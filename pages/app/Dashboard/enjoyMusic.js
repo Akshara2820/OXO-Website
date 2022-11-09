@@ -1,121 +1,165 @@
 import { MdWifi } from "react-icons/md";
 import { FaMusic, FaRegStar } from "react-icons/fa";
-import{TiImage} from 'react-icons/ti'
-import{BiShuffle} from 'react-icons/bi'
-import React, { useEffect, useRef } from "react";
+import { TiImage } from "react-icons/ti";
+import { BiShuffle } from "react-icons/bi";
+import React, {useRef } from "react";
 import styled from "styled-components";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const boxVariant = {
-  visible: {y:0, opacity: 1,  transition: { duration: 1 } },
-  hidden: {y:100, opacity: 0, }
+  show: { y: 0, transition: { duration: 0.4, staggerDirection: 0.8 }},
+  hidden: { y: 100 },
 };
 const audioVariant = {
-  visible: {y:0, opacity: 1,  transition: { duration: 2 } },
-  hidden: {y:100, opacity: 0, }
+  show: { y: 0, opacity: 1,transition: { duration: 1, staggerDirection: 0.8 } },
+  hidden: { y: 100, opacity: 0 },
 };
-
+const parent = {
+  hidden: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+  },
+};
+const child = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+  },
+};
+const Items = [
+  {
+    icon: <MdWifi className="text-[#da3654] icon" />,
+    title: "Works exactly like original",
+    strong:" Apple AirPlay"
+  },
+  {
+    icon: <FaMusic className="text-[#da3654] icon" />,
+    title: "if you are listening to your music",
+    strong:" AirAudio recognizes"
+  },
+  {
+    icon: <FaRegStar className="text-[#da3654] icon" />,
+    title: "for your favorite receivers",
+    strong:"Create shortcuts"
+  },
+];
+const Items2 = [
+  {
+    icon: <TiImage className="text-[#da3654] icon" />,
+    title: "Works exactly like original",
+    strong:" Apple AirPlay"
+  },
+  {
+    icon: <BiShuffle className="text-[#da3654] icon" />,
+    title: "if you are listening to your music",
+    strong:" AirAudio recognizes"
+  },
+  {
+    icon: <FaRegStar className="text-[#da3654] icon" />,
+    title: "for your favorite receivers",
+    strong:"Create shortcuts"
+  },
+];
 function EnjoyMusic() {
-  const control = useAnimation();
-  const [ref, inView] = useRef();
-
-  useEffect(() => {
-    if (inView) {
-      control.start("hidden");
-    } else {
-      control.start("visible");
-    }
-  }, [control, inView]);
+  const ref = useRef(null);
+  const isInView = useInView(ref);
   return (
     <Root>
       <div className="first_section">
-      <motion.div className="box" ref={ref} variants={boxVariant} initial="hidden" animate={control} >
-        <img
-          src="./image/oxo-5.png"
-          alt="loding..."
-          className="w-[540px] h-[450px] object-contain m-auto section_image"
-        />
-      </motion.div>
-      <motion.div className="box" ref={ref} variants={boxVariant} initial="hidden" animate={control} >
-        <div className="text_">
-          <div className="text-4xl my-4 font-medium text_">
-            Enjoy your music <br />
-            everywhere!
-          </div>
-          <p className="text_">
-            Each time a digital asset is purchased or sold,
-            <br /> Sequoir donates a percentage of the fees <br />
-            back into the development
-          </p>
-          <motion.div className="box" ref={ref} variants={boxVariant} initial="hidden" animate={control} >
-          <div className="flex gap-1 items-center font-['poppins'] my-4 ">
-            <MdWifi className="text-[#da3654] icon"  />
-            <div>
-              Works exactly like original <strong> Apple AirPlay</strong>
-            </div>
-          </div>
-          </motion.div>
-          <motion.div className="box" ref={ref} variants={boxVariant} initial="hidden" animate={control} >
-          <div className="flex gap-1 items-center my-4 ">
-            <FaMusic className="text-[#da3654] icon" />
-            <div>
-              <strong> AirAudio recognizes </strong> if you are listening to
-              your music
-            </div>
-          </div>
-          </motion.div>
-          <motion.div className="box" ref={ref} variants={boxVariant} initial="hidden" animate={control} >
-          <div className="flex gap-1 items-center my-4 ">
-            <FaRegStar className="text-[#da3654] icon" />
-            <div>
-              <strong> Create shortcuts </strong>for your favorite receivers
-            </div>
-          </div>
-          </motion.div>
-        </div>
+        <motion.div
+          className="box"
+          ref={ref}
+          variants={boxVariant}
+          initial={"hidden"}
+          animate={isInView ? "show" : "hidden"}
+        >
+          <img
+            src="./image/oxo-5.png"
+            alt="loding..."
+            className="w-[540px] h-[450px] object-contain m-auto section_image"
+          />
         </motion.div>
+          <motion.div
+            className="flex md:justify-between justify-center items-center flex-wrap"
+            ref={ref}
+            variants={parent}
+            initial={"hidden"}
+            animate={isInView ? "show" : "hidden"}
+            transition={{ duration: 0.5, staggerChildren: 0.2 }}
+          >
+            <div className="text_">
+              <div className="text-4xl my-4 font-medium text_">
+                Enjoy your music <br />
+                everywhere!
+              </div>
+              <p className="text_">
+                Each time a digital asset is purchased or sold,
+                <br /> Sequoir donates a percentage of the fees <br />
+                back into the development
+              </p>
+              {Items.map((i, ind) => {
+                return (
+                  <motion.div key={ind} variants={child}>
+                    <div className="flex gap-1 items-center font-['poppins'] my-4 ">
+                      {i.icon}
+                      <div>{i.title}<strong>{i.strong}</strong></div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
       </div>
 
       <div className="second_section">
-        <motion.div className="box" ref={ref} variants={audioVariant} initial="hidden" animate={control} >
-        <div className="text_down">
-          <div className="text-4xl my-4 font-medium">
-          The most powerful<br/> audio streamer for
-          </div>
-          <p className="text_down">
-            Each time a digital asset is purchased or sold,
-            <br /> Sequoir donates a percentage of the fees <br />
-            back into the development
-          </p>
-          <motion.div className="box" ref={ref} variants={audioVariant} initial="hidden" animate={control} >
-          <div className="flex gap-1 items-center font-['poppins'] my-4">
-            <TiImage className="text-[#da3654] icon" />
-            <div>
-              Works exactly like original <strong> Apple AirPlay</strong>
+        <motion.div
+          className="flex md:justify-between justify-center items-center flex-wrap"
+            ref={ref}
+            variants={parent}
+            initial={"hidden"}
+            animate={isInView ? "show" : "hidden"}
+            transition={{ duration: 0.5, staggerChildren: 0.2 }}
+        >
+          <div className="text_down">
+            <div className="text-4xl my-4 font-medium">
+              The most powerful
+              <br /> audio streamer for
             </div>
+            <p className="text_down">
+              Each time a digital asset is purchased or sold,
+              <br /> Sequoir donates a percentage of the fees <br />
+              back into the development
+            </p>
+            {Items2.map((i, ind) => {
+              return (
+                <motion.div key={ind} variants={child}>
+                  <div className="flex gap-1 items-center font-['poppins'] my-4">
+                    {i.icon}
+                    <div>{i.title}<strong>{i.strong}</strong></div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
-          </motion.div>
-          <motion.div className="box" ref={ref} variants={audioVariant} initial="hidden" animate={control} >
-          <div className="flex gap-1 items-center my-4">
-            <BiShuffle className="text-[#da3654] icon" />
-            <div>
-              <strong> AirAudio recognizes </strong> if you are listening to
-              your music
-            </div>
-          </div>
-          </motion.div>
-          <motion.div className="box" ref={ref} variants={audioVariant} initial="hidden" animate={control} >
-          <div className="flex gap-1 items-center my-4">
-            <FaRegStar className="text-[#da3654] icon" />
-            <div>
-              <strong> Create shortcuts </strong>for your favorite receivers
-            </div>
-          </div>
-          </motion.div>
-        </div>
         </motion.div>
-        <motion.div className="box" ref={ref} variants={audioVariant} initial="hidden" animate={control} >
-        <img src="./image/oxo-6.png"   alt="loding..." className="w-[540px] h-[450px] object-contain m-auto section_"/>
+        <motion.div
+          className="box"
+          ref={ref}
+          variants={audioVariant}
+          initial={"hidden"}
+          animate={isInView ? "show" : "hidden"}
+        >
+          <img
+            src="./image/oxo-6.png"
+            alt="loding..."
+            className="w-[540px] h-[450px] object-contain m-auto section_"
+          />
         </motion.div>
       </div>
     </Root>
@@ -141,22 +185,21 @@ const Root = styled.div`
       color: #c6c6e0;
       font-family: "Poppins", sans-serif;
     }
-    @media (max-width:1024px){
+    @media (max-width: 1024px) {
       display: flex;
       flex-direction: column;
       background-color: #04000f;
       padding: 0px 2rem;
-      .icon{
+      .icon {
         font-size: 30px;
       }
     }
-  
   }
   .second_section {
     padding: 50px 0;
     margin: 60px 0px;
     border-radius: 10px;
-    display: flex; 
+    display: flex;
     justify-content: space-between;
     align-items: center;
     p {
@@ -164,14 +207,13 @@ const Root = styled.div`
       color: #c6c6e0;
       font-family: "Poppins", sans-serif;
     }
-    @media (max-width:1024px){
+    @media (max-width: 1024px) {
       display: flex;
       flex-direction: column;
       padding: 0px 2rem;
-      .icon{
+      .icon {
         font-size: 30px;
       }
     }
   }
-  
 `;

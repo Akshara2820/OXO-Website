@@ -1,20 +1,20 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
-
+import { useInView } from "react-intersection-observer";
 const boxVariant = {
   visible: {y:0, opacity: 1,  transition: { duration: 1 } },
   hidden: {y:100, opacity: 0, }
 };
 function MobileSection() {
   const control = useAnimation();
-  const [ref, inView] = useRef();
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     if (inView) {
-      control.start("hidden");
-    } else {
       control.start("visible");
+    } else {
+      control.start("hidden");
     }
   }, [control, inView]);
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 const headingVariant = {
   visible: { opacity: 1,scale: 1, transition: { duration: 0.5 } },
   hidden: { opacity: 0, scale: 0 }
@@ -11,13 +12,13 @@ const boxVariant = {
 };
 function LatestBlog() {
   const control = useAnimation();
-  const [ref, inView] = useRef();
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     if (inView) {
-      control.start("hidden");
-    } else {
       control.start("visible");
+    } else {
+      control.start("hidden");
     }
   }, [control, inView]);
   return (

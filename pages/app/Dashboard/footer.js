@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 const headingVariant = {
@@ -13,13 +14,12 @@ const footerVariant = {
 };
 function Footer() {
   const control = useAnimation();
-  const [ref, inView] = useRef();
-
+  const [ref, inView] = useInView();
   useEffect(() => {
     if (inView) {
-      control.start("hidden");
-    } else {
       control.start("visible");
+    } else {
+      control.start("hidden");
     }
   }, [control, inView]);
   return (
