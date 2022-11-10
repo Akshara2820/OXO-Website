@@ -11,22 +11,15 @@ const imageVariant = {
   hidden: { y: 0, opacity: 0, scale: 0 },
 };
 const imageVariant1 = {
-  visible: { y: 100, x:100, opacity: 1, scale: 1, },
-  hidden: { y:0,  x: 0,opacity: 0, scale: 0  },
+  visible: { y: 0, x:100, opacity: 1, scale: 1, },
+  // visible: { y: 100, x:100, opacity: 1, scale: 1, },
+  // hidden: { y:0,  x: 0,opacity: 0, scale: 0  },
+  hidden: { y:100,  x: 0,opacity: 0, scale: 0  },
 };
 
 function Download() {
   const control = useAnimation();
   const [ref, inView] = useInView();
-  // const {scrollX, scrollXProgress, scrollY, scrollYProgress } = useScroll();
-  // const scrollRef = useRef(null)
-// useEffect(() => {
-//  console.log("scrollX..........", scrollX);
-//  console.log("scrollXProgress..........", scrollXProgress);
-//  console.log("scrollY..........", scrollY);
-//  console.log("scrollYProgress..........", scrollYProgress);
-// }, [scrollY])
-
   useEffect(() => {
     if (inView) {
       control.start("visible");
@@ -37,10 +30,8 @@ function Download() {
 
   return (
     <Root>
-          <motion.div 
-          ref={ref} variants={imageVariant1} initial="hidden" animate={control}
-              // initial={{ y:100,x: 100}}
-              whileInView={{ x:0 , y:0 , transition:{duration: 2 } }}
+          <motion.div ref={ref} variants={imageVariant1} initial="hidden" animate={control}
+              // whileInView={{ x:0 , y:0 , transition:{duration: 2 } }}
               viewport={{ root: ref }}
           
           >
