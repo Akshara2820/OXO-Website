@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, useScroll } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 const boxVariant = {
   visible: { y: 0, opacity: 1, transition: { duration: 1 } },
@@ -10,9 +10,22 @@ const imageVariant = {
   visible: { y: 10, opacity: 1, scale: 1, transition: { duration: 1 } },
   hidden: { y: 0, opacity: 0, scale: 0 },
 };
+const imageVariant1 = {
+  visible: { y: 100, x:100, opacity: 1, scale: 1, },
+  hidden: { y:0,  x: 0,opacity: 0, scale: 0  },
+};
+
 function Download() {
   const control = useAnimation();
   const [ref, inView] = useInView();
+  // const {scrollX, scrollXProgress, scrollY, scrollYProgress } = useScroll();
+  // const scrollRef = useRef(null)
+// useEffect(() => {
+//  console.log("scrollX..........", scrollX);
+//  console.log("scrollXProgress..........", scrollXProgress);
+//  console.log("scrollY..........", scrollY);
+//  console.log("scrollYProgress..........", scrollYProgress);
+// }, [scrollY])
 
   useEffect(() => {
     if (inView) {
@@ -24,11 +37,18 @@ function Download() {
 
   return (
     <Root>
-          <motion.div ref={ref}  variants={imageVariant}  initial="hidden" animate={control} >
+          <motion.div 
+          ref={ref} variants={imageVariant1} initial="hidden" animate={control}
+              // initial={{ y:100,x: 100}}
+              whileInView={{ x:0 , y:0 , transition:{duration: 2 } }}
+              viewport={{ root: ref }}
+          
+          >
             <div className="header-area">
               <div className="sass-bg-img"></div>
             </div>
           </motion.div>
+
           <motion.div ref={ref} variants={boxVariant} initial="hidden" animate={control}>
             <div className="sm:mx-6 flex font-['Roboto'] text-center md:text-start flex-col justify-center sm:items-start items-center lg:max-w-[40%]">
                 <h1 className="sm:pt-12">
@@ -47,6 +67,8 @@ function Download() {
 
 export default Download;
 const Root = styled.div`
+
+
   max-width: 1200px;
   width: 100%;
   margin: 0px auto 50px auto;
@@ -63,7 +85,7 @@ const Root = styled.div`
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
-    right: -10%;
+    right: 10%;
     z-index: 0;
     margin: auto;
     @media (max-width: 1024px) {
