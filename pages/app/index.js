@@ -15,9 +15,9 @@ function Dashboard() {
     <div>
      <Root>
       <div className="main_section">
-        <Header />
-        <Download />
-        <AppleAndroid />
+        <Header/>
+        <Download/>
+        <AppleAndroid/>
         <Stream />
       </div>
       <MobileSection />

@@ -3,10 +3,10 @@ import { motion, useInView } from "framer-motion";
 
 const parent = {
   hidden: {
-    opacity: 0,
+    opacity:0,
   },
   show: {
-    opacity: 1,
+    opacity:  1,
   },
 };
 
@@ -14,6 +14,7 @@ const child = {
   hidden: {
     opacity: 0,
     x: 10,
+
   },
   show: {
     opacity: 1,
